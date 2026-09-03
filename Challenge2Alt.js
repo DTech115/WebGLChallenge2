@@ -45,7 +45,7 @@ scene.add(directionalLight);
 const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(30, 30),
     new THREE.MeshStandardMaterial({
-        color: 0x3cb043
+        color: 0xebebeb
     })
 );
 
@@ -55,7 +55,7 @@ scene.add(ground);
 
 function createCastle(xPosition, bodyColor) {
 
-    const animal = new THREE.Group();
+    const castle = new THREE.Group();
 
     const material = new THREE.MeshStandardMaterial({
         color: bodyColor
@@ -63,27 +63,27 @@ function createCastle(xPosition, bodyColor) {
 
     // MAIN
     const main = new THREE.Mesh(
-        new THREE.BoxGeometry(3, 1.5, 1.5),
+        new THREE.BoxGeometry(10, 7, 5),
         material
     );
 
-    main.position.set(0, 1.5, 0);
+    main.position.set(0, 2, 0);
 
-    animal.add(main);
+    castle.add(main);
 
-    // HEAD
-    const head = new THREE.Mesh(
-        new THREE.SphereGeometry(0.9, 32, 32),
+    // SKULL
+    const skull = new THREE.Mesh(
+        new THREE.SphereGeometry(1, 16, 16),
         material
     );
 
     // Translation
-    head.position.set(2, 2, 0);
+    skull.position.set(0, 3, 1.5);
 
     // Scaling
-    head.scale.set(1.2, 1.2, 1.2);
+    skull.scale.set(3, 3, 3);
 
-    animal.add(head);
+    castle.add(skull);
 
     // TAIL
     const tail = new THREE.Mesh(
@@ -101,7 +101,7 @@ function createCastle(xPosition, bodyColor) {
     // Rotation
     tail.rotation.z = Math.PI / 4;
 
-    animal.add(tail);
+    castle.add(tail);
 
     // FOUR LEGS
     const legGeometry =
@@ -131,7 +131,7 @@ function createCastle(xPosition, bodyColor) {
             pos[2]
         );
 
-        animal.add(leg);
+        castle.add(leg);
     });
 
     // EYES
@@ -151,7 +151,7 @@ function createCastle(xPosition, bodyColor) {
         0.25
     );
 
-    animal.add(leftEye);
+    castle.add(leftEye);
 
     const rightEye = new THREE.Mesh(
         new THREE.SphereGeometry(0.1, 16, 16),
@@ -164,27 +164,27 @@ function createCastle(xPosition, bodyColor) {
         -0.25
     );
 
-    animal.add(rightEye);
+    castle.add(rightEye);
 
-    animal.position.x = xPosition;
+    castle.position.x = xPosition;
 
-    scene.add(animal);
+    scene.add(castle);
 }
 
 // Main Castle
-createCastle(0, 0xffa500);
+createCastle(0, 0x6b7863);
 
 // Bonus: Toy Ball
-const toyBall = new THREE.Mesh(
-    new THREE.SphereGeometry(0.4, 32, 32),
-    new THREE.MeshStandardMaterial({
-        color: 0xff0000
-    })
-);
+// const toyBall = new THREE.Mesh(
+//     new THREE.SphereGeometry(0.4, 32, 32),
+//     new THREE.MeshStandardMaterial({
+//         color: 0xff0000
+//     })
+// );
 
-toyBall.position.set(3, 0.4, 0);
+// toyBall.position.set(3, 0.4, 0);
 
-scene.add(toyBall);
+// scene.add(toyBall);
 
 // Half the trees remain
 for (let i = -10; i <= 10; i += 4) {
@@ -218,7 +218,7 @@ function animate() {
         animate
     );
 
-    toyBall.rotation.y += 0.03;
+    // toyBall.rotation.y += 0.03;
 
     renderer.render(
         scene,
