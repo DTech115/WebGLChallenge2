@@ -63,7 +63,7 @@ function createCastle(xPosition, bodyColor) {
 
     // MAIN
     const main = new THREE.Mesh(
-        new THREE.BoxGeometry(10, 7, 5),
+        new THREE.BoxGeometry(7, 13, 5),
         material
     );
 
@@ -103,35 +103,35 @@ function createCastle(xPosition, bodyColor) {
 
     castle.add(tail);
 
-    // FOUR LEGS
-    const legGeometry =
-        new THREE.BoxGeometry(
-            0.4,
-            1.5,
-            0.4
+    // FOUR TOWERS
+    const towerGeometry =
+        new THREE.CylinderGeometry(
+            1.3,
+            1.3,
+            19
         );
 
-    const legPositions = [
-        [-1, 0.75, -0.5],
-        [1, 0.75, -0.5],
-        [-1, 0.75, 0.5],
-        [1, 0.75, 0.5]
+    const towerPositions = [
+        [-4, 0, 2],
+        [4, 0, 2],
+        [-7.5, 0.75],
+        [7.5, 0.75]
     ];
 
-    legPositions.forEach(pos => {
+    towerPositions.forEach(pos => {
 
-        const leg = new THREE.Mesh(
-            legGeometry,
+        const tower = new THREE.Mesh(
+            towerGeometry,
             material
         );
 
-        leg.position.set(
+        tower.position.set(
             pos[0],
             pos[1],
             pos[2]
         );
 
-        castle.add(leg);
+        castle.add(tower);
     });
 
     // EYES
@@ -141,27 +141,27 @@ function createCastle(xPosition, bodyColor) {
         });
 
     const leftEye = new THREE.Mesh(
-        new THREE.SphereGeometry(0.1, 16, 16),
+        new THREE.SphereGeometry(1, 16, 16),
         eyeMaterial
     );
 
     leftEye.position.set(
-        2.8,
-        2.2,
-        0.25
+        -1,
+        3,
+        3.4
     );
 
     castle.add(leftEye);
 
     const rightEye = new THREE.Mesh(
-        new THREE.SphereGeometry(0.1, 16, 16),
+        new THREE.SphereGeometry(1, 16, 16),
         eyeMaterial
     );
 
     rightEye.position.set(
-        2.8,
-        2.2,
-        -0.25
+        1,
+        3,
+        3.4
     );
 
     castle.add(rightEye);
