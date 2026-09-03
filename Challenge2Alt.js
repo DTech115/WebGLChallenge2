@@ -121,8 +121,22 @@ function createCastle(xPosition, bodyColor) {
     const towerPositions = [
         [-4, 0, 2],
         [4, 0, 2],
-        [-7.5, 0.75],
-        [7.5, 0.75]
+        [-7.5, 0.75, 0],
+        [7.5, 0.75, 0]
+    ];
+
+    const towerHatGeometry =
+        new THREE.CylinderGeometry(
+            1.7,
+            1.7,
+            1.6
+        );
+
+    const towerHatPositions = [
+        [-4, 9, 2],
+        [4, 9, 2],
+        [-7.5, 9.2, 0],
+        [7.5, 9.2, 0]
     ];
 
     towerPositions.forEach(pos => {
@@ -131,6 +145,7 @@ function createCastle(xPosition, bodyColor) {
             towerGeometry,
             material
         );
+        
 
         tower.position.set(
             pos[0],
@@ -139,6 +154,22 @@ function createCastle(xPosition, bodyColor) {
         );
 
         castle.add(tower);
+    });
+
+    towerHatPositions.forEach(pos => {
+
+        const towerHat = new THREE.Mesh(
+            towerHatGeometry,
+            material
+        )
+
+        towerHat.position.set(
+            pos[0],
+            pos[1],
+            pos[2]
+        )
+
+        castle.add(towerHat);
     });
 
     // EYES
