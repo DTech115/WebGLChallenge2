@@ -2,7 +2,7 @@ import * as THREE from "https://unpkg.com/three@0.167.1/build/three.module.js";
 
 // Scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x87ceeb);
+scene.background = new THREE.Color(0x210e1b);
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -33,7 +33,7 @@ const ambientLight = new THREE.AmbientLight(
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(
-    0xffffff,
+    0xd59de6,
     2
 );
 
@@ -45,7 +45,7 @@ scene.add(directionalLight);
 const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(30, 30),
     new THREE.MeshStandardMaterial({
-        color: 0xebebeb
+        color: 0xbdabba
     })
 );
 
@@ -146,9 +146,9 @@ function createCastle(xPosition, bodyColor) {
     );
 
     leftEye.position.set(
-        -1,
-        3,
-        3.4
+        -0.9,
+        3.5,
+        3.5
     );
 
     castle.add(leftEye);
@@ -159,9 +159,9 @@ function createCastle(xPosition, bodyColor) {
     );
 
     rightEye.position.set(
-        1,
-        3,
-        3.4
+        0.9,
+        3.5,
+        3.5
     );
 
     castle.add(rightEye);
@@ -186,30 +186,27 @@ createCastle(0, 0x6b7863);
 
 // scene.add(toyBall);
 
-// Half the trees remain
-for (let i = -10; i <= 10; i += 4) {
+// peak of mountain
+const peak = new THREE.Mesh(
+    new THREE.ConeGeometry(
+        2.1,
+        6.6,
+        8
+    ),
+    new THREE.MeshStandardMaterial({
+        color: 0xededed
+    })
+);
 
-    const tree = new THREE.Mesh(
-        new THREE.ConeGeometry(
-            2.1,
-            6.6,
-            8
-        ),
-        new THREE.MeshStandardMaterial({
-            color: 0x228b22
-        })
-    );
+peak.position.set(
+    0,
+    3.3,
+    -4
+);
 
-    tree.position.set(
-        i,
-        3.3,
-        -4
-    );
+peak.scale.set(12, 3, 5);
 
-    tree.scale.set(3, 3, 3);
-
-    scene.add(tree);
-}
+scene.add(peak);
 
 // Animation Loop
 function animate() {
