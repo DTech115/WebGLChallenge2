@@ -179,7 +179,7 @@ function createCastle(xPosition, bodyColor) {
         });
 
     const leftEye = new THREE.Mesh(
-        new THREE.SphereGeometry(1, 16, 16),
+        new THREE.SphereGeometry(1, 10, 4),
         eyeMaterial
     );
 
@@ -192,7 +192,7 @@ function createCastle(xPosition, bodyColor) {
     castle.add(leftEye);
 
     const rightEye = new THREE.Mesh(
-        new THREE.SphereGeometry(1, 16, 16),
+        new THREE.SphereGeometry(1, 10, 4),
         eyeMaterial
     );
 
@@ -225,6 +225,28 @@ function createCastle(xPosition, bodyColor) {
 
     castle.add(nose);
 
+    const doorMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0x401800
+        });
+
+    const door = new THREE.Mesh(
+        new THREE.BoxGeometry(1.7, 2, 0.5),
+        doorMaterial
+    );
+
+     door.position.set(
+        0,
+        1.8,
+        3.9
+    );
+
+    castle.add(door);
+
+
+    
+
+
     scene.add(castle);
 
     
@@ -232,18 +254,6 @@ function createCastle(xPosition, bodyColor) {
 
 // Main Castle
 createCastle(0, 0x6b7863);
-
-// Bonus: Toy Ball
-// const toyBall = new THREE.Mesh(
-//     new THREE.SphereGeometry(0.4, 32, 32),
-//     new THREE.MeshStandardMaterial({
-//         color: 0xff0000
-//     })
-// );
-
-// toyBall.position.set(3, 0.4, 0);
-
-// scene.add(toyBall);
 
 // peak of mountain
 const peak = new THREE.Mesh(
