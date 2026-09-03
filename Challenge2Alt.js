@@ -1,0 +1,247 @@
+import * as THREE from "https://unpkg.com/three@0.167.1/build/three.module.js";
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
+
+// Camera
+const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
+
+camera.position.set(0, 4, 10);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+document.body.appendChild(renderer.domElement);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(
+    0xffffff,
+    1.5
+);
+
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(
+    0xffffff,
+    2
+);
+
+directionalLight.position.set(5, 10, 7);
+
+scene.add(directionalLight);
+
+// Ground (Bonus)
+const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(30, 30),
+    new THREE.MeshStandardMaterial({
+        color: 0x3cb043
+    })
+);
+
+ground.rotation.x = -Math.PI / 2;
+
+scene.add(ground);
+
+function createCastle(xPosition, bodyColor) {
+
+    const animal = new THREE.Group();
+
+    const material = new THREE.MeshStandardMaterial({
+        color: bodyColor
+    });
+
+    // MAIN
+    const main = new THREE.Mesh(
+        new THREE.BoxGeometry(3, 1.5, 1.5),
+        material
+    );
+
+    main.position.set(0, 1.5, 0);
+
+    animal.add(main);
+
+    // HEAD
+    const head = new THREE.Mesh(
+        new THREE.SphereGeometry(0.9, 32, 32),
+        material
+    );
+
+    // Translation
+    head.position.set(2, 2, 0);
+
+    // Scaling
+    head.scale.set(1.2, 1.2, 1.2);
+
+    animal.add(head);
+
+    // TAIL
+    const tail = new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            0.15,
+            0.15,
+            2,
+            16
+        ),
+        material
+    );
+
+    tail.position.set(-1.8, 2, 0);
+
+    // Rotation
+    tail.rotation.z = Math.PI / 4;
+
+    animal.add(tail);
+
+    // FOUR LEGS
+    const legGeometry =
+        new THREE.BoxGeometry(
+            0.4,
+            1.5,
+            0.4
+        );
+
+    const legPositions = [
+        [-1, 0.75, -0.5],
+        [1, 0.75, -0.5],
+        [-1, 0.75, 0.5],
+        [1, 0.75, 0.5]
+    ];
+
+    legPositions.forEach(pos => {
+
+        const leg = new THREE.Mesh(
+            legGeometry,
+            material
+        );
+
+        leg.position.set(
+            pos[0],
+            pos[1],
+            pos[2]
+        );
+
+        animal.add(leg);
+    });
+
+    // EYES
+    const eyeMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0x000000
+        });
+
+    const leftEye = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1, 16, 16),
+        eyeMaterial
+    );
+
+    leftEye.position.set(
+        2.8,
+        2.2,
+        0.25
+    );
+
+    animal.add(leftEye);
+
+    const rightEye = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1, 16, 16),
+        eyeMaterial
+    );
+
+    rightEye.position.set(
+        2.8,
+        2.2,
+        -0.25
+    );
+
+    animal.add(rightEye);
+
+    animal.position.x = xPosition;
+
+    scene.add(animal);
+}
+
+// Main Castle
+createCastle(0, 0xffa500);
+
+// Bonus: Toy Ball
+const toyBall = new THREE.Mesh(
+    new THREE.SphereGeometry(0.4, 32, 32),
+    new THREE.MeshStandardMaterial({
+        color: 0xff0000
+    })
+);
+
+toyBall.position.set(3, 0.4, 0);
+
+scene.add(toyBall);
+
+// Half the trees remain
+for (let i = -10; i <= 10; i += 4) {
+
+    const tree = new THREE.Mesh(
+        new THREE.ConeGeometry(
+            2.1,
+            6.6,
+            8
+        ),
+        new THREE.MeshStandardMaterial({
+            color: 0x228b22
+        })
+    );
+
+    tree.position.set(
+        i,
+        3.3,
+        -4
+    );
+
+    tree.scale.set(3, 3, 3);
+
+    scene.add(tree);
+}
+
+// Animation Loop
+function animate() {
+
+    requestAnimationFrame(
+        animate
+    );
+
+    toyBall.rotation.y += 0.03;
+
+    renderer.render(
+        scene,
+        camera
+    );
+}
+
+animate();
+
+// Responsive
+window.addEventListener(
+    "resize",
+    () => {
+
+        camera.aspect =
+            window.innerWidth /
+            window.innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+    }
+);
