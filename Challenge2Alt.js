@@ -244,8 +244,38 @@ function createCastle(xPosition, bodyColor) {
     castle.add(door);
 
 
-    
+    // FANGS
+    const leftFang = new THREE.Mesh(
+        new THREE.ConeGeometry(0.5, 2),
+        material
+    );
 
+    leftFang.position.set(
+        -1.13,
+        2,
+        4
+    );
+
+    leftFang.rotation.z = Math.PI + 0.3;
+    leftFang.rotation.x = -0.7;
+
+    castle.add(leftFang);
+
+    const rightFang = new THREE.Mesh(
+        new THREE.ConeGeometry(0.5, 2),
+        material
+    );
+
+    rightFang.position.set(
+        1.13,
+        2,
+        4
+    );
+
+    rightFang.rotation.z = Math.PI - 0.3;
+    rightFang.rotation.x = -0.7;
+
+    castle.add(rightFang);
 
     scene.add(castle);
 
