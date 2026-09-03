@@ -78,30 +78,37 @@ function createCastle(xPosition, bodyColor) {
     );
 
     // Translation
-    skull.position.set(0, 3, 1.5);
+    skull.position.set(0, 4, 1.5);
 
     // Scaling
     skull.scale.set(3, 3, 3);
 
     castle.add(skull);
 
-    // TAIL
-    const tail = new THREE.Mesh(
+    // HELMET
+    const helmet = new THREE.Mesh(
         new THREE.CylinderGeometry(
-            0.15,
-            0.15,
-            2,
-            16
+            2.8,
+            2.8,
+            1.5
+        ),
+        material
+    );
+    const helmet2 = new THREE.Mesh(
+        new THREE.SphereGeometry(
+            2.7
         ),
         material
     );
 
-    tail.position.set(-1.8, 2, 0);
+    helmet.position.set(0, 5.7, 2);
+    helmet2.position.set(0, 6.5, 2);
 
     // Rotation
-    tail.rotation.z = Math.PI / 4;
+    // helmet.rotation.z = Math.PI / 4;
 
-    castle.add(tail);
+    castle.add(helmet);
+    castle.add(helmet2);
 
     // FOUR TOWERS
     const towerGeometry =
@@ -147,7 +154,7 @@ function createCastle(xPosition, bodyColor) {
 
     leftEye.position.set(
         -0.9,
-        3.5,
+        4.1,
         3.5
     );
 
@@ -160,7 +167,7 @@ function createCastle(xPosition, bodyColor) {
 
     rightEye.position.set(
         0.9,
-        3.5,
+        4.1,
         3.5
     );
 
@@ -168,7 +175,28 @@ function createCastle(xPosition, bodyColor) {
 
     castle.position.x = xPosition;
 
+    // NOSE
+    const noseMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0x000000
+        });
+
+    const nose = new THREE.Mesh(
+        new THREE.ConeGeometry(0.4, 0.8),
+        noseMaterial
+    );
+
+     nose.position.set(
+        0,
+        3.6,
+        4.4
+    );
+
+    castle.add(nose);
+
     scene.add(castle);
+
+    
 }
 
 // Main Castle
